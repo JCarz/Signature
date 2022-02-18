@@ -18,6 +18,9 @@ div .wrapper {
   text-align: center;
   max-width: fit-content;
 }
+.signHere {
+  padding: 1rem;
+}
 
 .App-header {
   background-color: #282c34;
