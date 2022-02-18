@@ -1,46 +1,44 @@
 import React, { useState } from "react"
 import "./App.css"
-
+import { ChakraProvider, Button, Input, Progress } from "@chakra-ui/react"
 function App() {
   const [showForm, setShowForm] = useState(false)
   const showForm1 = () => {
     setShowForm(!showForm)
   }
+
   return (
-    <div className="wrapper">
-      <h1>Form Submit</h1>
+    <ChakraProvider>
+      <div className="wrapper">
+        <h1>Form Submit</h1>
 
-      <button className="signHere" onClick={showForm1}>
-        Sign Here
-      </button>
+        <Button onClick={showForm1} colorScheme="blue" variant="solid" isActive>
+          Sign Here
+        </Button>
 
-      {showForm && (
-        <form>
-          <div className="signaturePic"></div>
-          <fieldset>
-            <label>
-              <p>Complete Full Name</p>
-              <input name="name" placeholder="Type Here" />
-              <p>Title</p>
-              <input title="tile" placeholder="Type Here" />
-              <p>Company (optional)</p>
-              <input company="company" placeholder="Type Here" />
-            </label>
-            <hr></hr>
+        {showForm && (
+          <form>
+            <div className="signaturePic"></div>
+            <fieldset>
+              <label>
+                <p>Complete Name</p>
+                <Input variant="outline" placeholder="Type Here" />
+                <p>Title</p>
+                <Input variant="outline" placeholder="Type Here" />
+                <p>Company (optional)</p>
+                <Input variant="outline" placeholder="Type Here" />
+              </label>
 
-            <p>
-              {" "}
-              <img
-                name="timer"
-                src="https://img.icons8.com/fluency-systems-regular/48/000000/timer.png"
-              />
-              Waiting for <strong>Persons</strong> signature
-            </p>
-          </fieldset>
-          <button type="submit">Submit</button>
-        </form>
-      )}
-    </div>
+              <p>
+                <Progress size="xs" isIndeterminate hasStripe />
+                Waiting for <strong>Persons</strong> signature
+              </p>
+            </fieldset>
+            <Button type="submit">Submit</Button>
+          </form>
+        )}
+      </div>
+    </ChakraProvider>
   )
 }
 export default App
