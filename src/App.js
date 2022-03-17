@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import "./App.css"
+import SignaturePad from "react-signature-canvas"
+
 import {
   ChakraProvider,
   Button,
@@ -18,6 +20,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react"
+
 function App() {
   const [showForm, setShowForm] = useState(false)
   const showForm1 = () => {
@@ -26,6 +29,8 @@ function App() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef() //useRef returns a mutable(liable to change) ref object whose .current property is initialized to the passed argument (initialValue).Reference of the componet that has focus on when the modal opens
   const finalRef = React.useRef() //receives focus when the modal closes.
+
+  const clear = () => SignaturePad.get.clear()
   return (
     <ChakraProvider>
       <div className="wrapper">
@@ -34,15 +39,14 @@ function App() {
           Sign Here
         </Button>
 
-        <Button onClick={onOpen}>
-          Open Modal
-        </Button>
+        <Button onClick={onOpen}>Open Modal</Button>
 
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
+            <ModalHeader>Input Credentials:</ModalHeader>
             <ModalCloseButton />
+
             <ModalBody>
               <FormControl>
                 <FormLabel>First Name</FormLabel>
@@ -51,6 +55,13 @@ function App() {
                 <Input ref={initialRef} placeholder="Type Here" />
                 <FormLabel>Company(optional)</FormLabel>
                 <Input ref={initialRef} placeholder="Type Here" />
+
+                <SignaturePad
+                  canvasProps={{
+                    className: "signatureCanvas",
+                  }}
+                />
+
                 <p>
                   <Progress size="xs" isIndeterminate hasStripe />
                   Waiting for <strong>Persons</strong> signature
@@ -59,10 +70,17 @@ function App() {
             </ModalBody>
 
             <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={onClose}>
+              <Button
+                colorScheme="blue"
+                mr={3}
+                onClick={onClose}
+                className="closeButton"
+              >
                 Close
               </Button>
-              <Button variant="ghost">Secondary Action</Button>
+              <Button variant="ghost" className="clearButton">
+                Clear
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

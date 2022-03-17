@@ -25,6 +25,18 @@ div .wrapper {
 p {
   text-align: center;
 }
+.clearButton,
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signatureCanvas {
+  margin-top: 1rem;
+  border: 1px solid black;
+  width: 100%;
+  min-height: 320px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
